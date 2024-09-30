@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:project_kindergarden/features/Auth/view/school/schoollogin.dart';
+import 'package:project_kindergarden/features/Auth/view/student/studentlogin.dart';
+import 'package:project_kindergarden/features/Auth/view/teacher/teacherlogin.dart';
 import 'package:project_kindergarden/theme/pallete.dart';
+import 'package:get/get.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
@@ -28,7 +32,7 @@ class _StartScreenState extends State<StartScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              height: MediaQuery.sizeOf(context).height * 0.18,
+              height: MediaQuery.sizeOf(context).height * 0.175,
             ),
             SvgPicture.asset('assets/images/Teacher student-pana 1@2x.svg'),
             SizedBox(
@@ -44,7 +48,7 @@ class _StartScreenState extends State<StartScreen> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.sizeOf(context).height * 0.022,
+              height: MediaQuery.sizeOf(context).height * 0.02,
             ),
             const Text(
               'Vous êtes ...',
@@ -54,7 +58,7 @@ class _StartScreenState extends State<StartScreen> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.sizeOf(context).height * 0.025,
+              height: MediaQuery.sizeOf(context).height * 0.021,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -63,30 +67,94 @@ class _StartScreenState extends State<StartScreen> {
                   onPressed: () => _selectButton(0),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: _selectedButtonIndex == 0
-                        ? Pallete.primarygreenColor
-                        : Colors.grey,
+                        ? Pallete.secondarygreenColor
+                        : Colors.transparent,
                   ),
                   child: const Text('école'),
                 ),
                 ElevatedButton(
                   onPressed: () => _selectButton(1),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        _selectedButtonIndex == 1 ? Colors.blue : Colors.grey,
+                    backgroundColor: _selectedButtonIndex == 1
+                        ? Pallete.secondarygreenColor
+                        : Colors.white,
                   ),
                   child: const Text('enseignant'),
                 ),
                 ElevatedButton(
                   onPressed: () => _selectButton(2),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        _selectedButtonIndex == 2 ? Colors.blue : Colors.grey,
+                    backgroundColor: _selectedButtonIndex == 2
+                        ? Pallete.secondarygreenColor
+                        : Colors.transparent,
                   ),
                   child: const Text('élève'),
                 ),
               ],
             ),
+            SizedBox(
+              height: MediaQuery.sizeOf(context).height * 0.025,
+            ),
+            SelectionnerButton(
+              selectedindex: _selectedButtonIndex,
+            ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class CustomButton extends StatelessWidget {
+  CustomButton({super.key, required this.selcto});
+  VoidCallback selcto;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: selcto,
+      child: Container(),
+    );
+  }
+}
+
+class SelectionnerButton extends StatelessWidget {
+  const SelectionnerButton({
+    super.key,
+    required this.selectedindex,
+  });
+  final int selectedindex;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(bottom: 12),
+      width: MediaQuery.of(context).size.width * 0.6,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            elevation: 0.0,
+            backgroundColor: Pallete.secondarygreenColor,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10))),
+        onPressed: () {
+          if (selectedindex == 0) {
+            Get.to(const SchoolLoginScreen());
+          } else if (selectedindex == 1) {
+            Get.to(const TeacherLoginScreen());
+          } else if (selectedindex == 2) {
+            Get.to(const StudentLoginScreen());
+          }
+        },
+        child: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text(
+            'Continuer',
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'poppins',
+              fontSize: 22,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
         ),
       ),
     );

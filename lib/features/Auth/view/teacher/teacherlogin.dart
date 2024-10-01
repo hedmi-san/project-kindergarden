@@ -5,6 +5,6 @@ class TeacherLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Text('shcool'));
+    return const Scaffold(body: Text('teacher'));
   }
 }

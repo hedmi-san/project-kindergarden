@@ -5,6 +5,34 @@ class StudentLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Text('shcool'));
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+            onPressed: () {},
+          ),
+          title: const Text('Login étudiant'),
+          backgroundColor: Colors.transparent,
+        ),
+      ),
+    );
   }
 }
+
+/** page architecture
+ * card 1st parent : 
+ *  image
+ *  row text and <-
+ *  sized box 
+ *  container 2nd parent 
+ *    text 
+ *    text
+ *    tex input 
+ *    buttons 
+ * 
+ */

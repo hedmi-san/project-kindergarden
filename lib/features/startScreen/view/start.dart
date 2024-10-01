@@ -42,7 +42,7 @@ class _StartScreenState extends State<StartScreen> {
                 'Nous relions les élèves, les parents et l\'administration scolaire pour un avenir meilleur.Commencez à explorer toutes les fonctionnalités et services que nous offrons.',
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
-                  fontSize: 16,
+                  fontSize: 15,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -54,7 +54,7 @@ class _StartScreenState extends State<StartScreen> {
               'Vous êtes ...',
               style: TextStyle(
                 fontWeight: FontWeight.w700,
-                fontSize: 21,
+                fontSize: 20,
               ),
             ),
             SizedBox(
@@ -63,39 +63,30 @@ class _StartScreenState extends State<StartScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ElevatedButton(
-                  onPressed: () => _selectButton(0),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: _selectedButtonIndex == 0
-                        ? Pallete.secondarygreenColor
-                        : Colors.transparent,
-                  ),
-                  child: const Text('école'),
+                CustomButton(
+                  text: 'école',
+                  selection: _selectButton,
+                  index: 0,
+                  isSelected: _selectedButtonIndex == 0,
                 ),
-                ElevatedButton(
-                  onPressed: () => _selectButton(1),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: _selectedButtonIndex == 1
-                        ? Pallete.secondarygreenColor
-                        : Colors.white,
-                  ),
-                  child: const Text('enseignant'),
+                CustomButton(
+                  text: 'enseignent',
+                  selection: _selectButton,
+                  index: 1,
+                  isSelected: _selectedButtonIndex == 1,
                 ),
-                ElevatedButton(
-                  onPressed: () => _selectButton(2),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: _selectedButtonIndex == 2
-                        ? Pallete.secondarygreenColor
-                        : Colors.transparent,
-                  ),
-                  child: const Text('élève'),
+                CustomButton(
+                  text: 'étudiant',
+                  selection: _selectButton,
+                  index: 2,
+                  isSelected: _selectedButtonIndex == 2,
                 ),
               ],
             ),
             SizedBox(
               height: MediaQuery.sizeOf(context).height * 0.025,
             ),
-            SelectionnerButton(
+            ContinueButton(
               selectedindex: _selectedButtonIndex,
             ),
           ],
@@ -106,19 +97,46 @@ class _StartScreenState extends State<StartScreen> {
 }
 
 class CustomButton extends StatelessWidget {
-  CustomButton({super.key, required this.selcto});
-  VoidCallback selcto;
+  final Function(int) selection;
+  final int index;
+  final bool isSelected;
+  final String text;
+
+  const CustomButton({
+    super.key,
+    required this.text,
+    required this.selection,
+    required this.index,
+    required this.isSelected,
+  });
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: selcto,
-      child: Container(),
+      onTap: () => selection(index),
+      child: Container(
+        width: 100,
+        height: 50,
+        decoration: BoxDecoration(
+            color: isSelected ? Pallete.primarygreenColor : Colors.transparent,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Pallete.bordergreyColor)),
+        child: Center(
+          child: Text(
+            text,
+            style: const TextStyle(
+              color: Pallete.disablegreyColor,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
 
-class SelectionnerButton extends StatelessWidget {
-  const SelectionnerButton({
+class ContinueButton extends StatelessWidget {
+  const ContinueButton({
     super.key,
     required this.selectedindex,
   });
@@ -131,10 +149,12 @@ class SelectionnerButton extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.6,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            elevation: 0.0,
-            backgroundColor: Pallete.secondarygreenColor,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10))),
+          elevation: 0.0,
+          backgroundColor: Pallete.secondarygreenColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
         onPressed: () {
           if (selectedindex == 0) {
             Get.to(const SchoolLoginScreen());
@@ -142,6 +162,13 @@ class SelectionnerButton extends StatelessWidget {
             Get.to(const TeacherLoginScreen());
           } else if (selectedindex == 2) {
             Get.to(const StudentLoginScreen());
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Selectioner un role SVP'),
+                duration: Duration(milliseconds: 1500),
+              ),
+            );
           }
         },
         child: const Padding(
@@ -150,7 +177,6 @@ class SelectionnerButton extends StatelessWidget {
             'Continuer',
             style: TextStyle(
               color: Colors.white,
-              fontFamily: 'poppins',
               fontSize: 22,
               fontWeight: FontWeight.w400,
             ),

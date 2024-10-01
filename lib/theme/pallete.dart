@@ -7,4 +7,5 @@ class Pallete {
   static const Color bordergreyColor = Color.fromRGBO(215, 215, 215, 1);
   static const Color disablegreyColor = Color.fromRGBO(119, 127, 130, 1);
   static const Color darkestshadeColor = Color.fromRGBO(38, 50, 56, 1);
+  static const Color textgreyColor = Color.fromRGBO(94, 94, 94, 1);
 }

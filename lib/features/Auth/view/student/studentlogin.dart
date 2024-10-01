@@ -1,4 +1,11 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:project_kindergarden/theme/theme.dart';
+
+final phoneNumber = TextEditingController();
+final password = TextEditingController();
 
 class StudentLoginScreen extends StatelessWidget {
   const StudentLoginScreen({super.key});
@@ -7,7 +14,7 @@ class StudentLoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
+        body: Stack(
           children: [
             Container(
               height: MediaQuery.sizeOf(context).height * 0.31,
@@ -42,8 +49,67 @@ class StudentLoginScreen extends StatelessWidget {
                   SizedBox(
                     height: MediaQuery.sizeOf(context).height * 0.19,
                   ),
-                  Container(),
                 ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                height: MediaQuery.sizeOf(context).height * 0.70,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(40),
+                    topRight: Radius.circular(40),
+                  ),
+                ),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: MediaQuery.sizeOf(context).height * 0.03,
+                        ),
+                        const Text(
+                          'Bienvenue sur',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 25),
+                        ),
+                        const Text(
+                          'مُراسَلتِي',
+                          style: TextStyle(
+                            color: Pallete.secondarygreenColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25,
+                            fontFamily: 'Cairo',
+                          ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.sizeOf(context).height * 0.02,
+                        ),
+                        SizedBox(
+                          width: MediaQuery.sizeOf(context).width * 0.85,
+                          child: const Text(
+                            'Connecter les étudiants, les parents et les écoles pour un avenir meilleur.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Pallete.textgreyColor, fontSize: 15),
+                          ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.sizeOf(context).height * 0.05,
+                        ),
+                        const PhoneNumberTextForm(),
+                        SizedBox(
+                          height: MediaQuery.sizeOf(context).height * 0.001,
+                        ),
+                        const PasswordTextForm(),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -53,14 +119,142 @@ class StudentLoginScreen extends StatelessWidget {
   }
 }
 
-/** page architecture
- * card 1st parent : 
- *  image
- *  row text and <-
- *  sized box 
- *  container 2nd parent 
- *    text 
- *    text
- *    tex input 
- *    buttons 
- */
+class PhoneNumberTextForm extends StatefulWidget {
+  const PhoneNumberTextForm({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  _PhoneNumberTextFormState createState() => _PhoneNumberTextFormState();
+}
+
+class _PhoneNumberTextFormState extends State<PhoneNumberTextForm> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(left: 30),
+          child: Text(
+            'N° telephone',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          child: TextField(
+            controller: phoneNumber,
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
+              hintText: 'xx-xx-xx-xx-xx',
+              hintStyle: TextStyle(
+                color: Pallete.disablegreyColor,
+                fontSize: 14,
+                fontWeight: FontWeight.w100,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class PasswordTextForm extends StatefulWidget {
+  const PasswordTextForm({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  _PasswordTextFormState createState() => _PasswordTextFormState();
+}
+
+class _PasswordTextFormState extends State<PasswordTextForm> {
+  bool obscureText = true;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(left: 30),
+          child: Text(
+            'Mot de passe',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: TextField(
+            controller: password,
+            obscureText: obscureText,
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
+              hintText: 'mot de passe',
+              hintStyle: const TextStyle(
+                color: Pallete.disablegreyColor,
+                fontSize: 14,
+                fontWeight: FontWeight.w100,
+              ),
+              suffixIcon: IconButton(
+                icon: Icon(
+                  obscureText ? Icons.visibility_off : Icons.visibility,
+                ),
+                onPressed: () {
+                  setState(() {
+                    obscureText = !obscureText;
+                  });
+                },
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ContinueButton extends StatelessWidget {
+  const ContinueButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(bottom: 12),
+      width: MediaQuery.of(context).size.width * 0.6,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          elevation: 0.0,
+          backgroundColor: Pallete.secondarygreenColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+        onPressed: () {},
+        child: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text(
+            'Continuer',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 22,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

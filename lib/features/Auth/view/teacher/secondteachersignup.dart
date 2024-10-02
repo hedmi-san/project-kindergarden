@@ -2,16 +2,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_kindergarden/features/Auth/view/student/secondstudentsignup.dart';
 import 'package:project_kindergarden/features/Auth/view/teacher/teacherlogin.dart';
+import 'package:project_kindergarden/features/Auth/view/teacher/teachersignup.dart';
 import 'package:project_kindergarden/theme/theme.dart';
 
-final phoneNumber = TextEditingController();
-final familyname = TextEditingController();
-final name = TextEditingController();
+final passwordconfirm = TextEditingController();
+final password = TextEditingController();
 
-class TeacherSignUp extends StatelessWidget {
-  const TeacherSignUp({super.key});
+class TeacherConfirmSignUpScreen extends StatelessWidget {
+  const TeacherConfirmSignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +43,7 @@ class TeacherSignUp extends StatelessWidget {
                     alignment: Alignment.topLeft,
                     child: IconButton(
                       onPressed: () {
-                        Get.off(const TeacherLoginScreen());
+                        Get.off(const TeacherSignUp());
                       },
                       icon: const Icon(
                         Icons.arrow_back,
@@ -73,57 +72,55 @@ class TeacherSignUp extends StatelessWidget {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: MediaQuery.sizeOf(context).height * 0.03,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: MediaQuery.sizeOf(context).height * 0.03,
+                        ),
+                        const Text(
+                          'Bienvenue sur',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 25),
+                        ),
+                        const Text(
+                          'مُراسَلتِي',
+                          style: TextStyle(
+                            color: Pallete.secondarygreenColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25,
+                            fontFamily: 'Cairo',
                           ),
-                          const Text(
-                            'Bienvenue sur',
+                        ),
+                        SizedBox(
+                          height: MediaQuery.sizeOf(context).height * 0.02,
+                        ),
+                        SizedBox(
+                          width: MediaQuery.sizeOf(context).width * 0.85,
+                          child: const Text(
+                            'Connecter les étudiants, les parents et les écoles pour un avenir meilleur.',
+                            textAlign: TextAlign.center,
                             style: TextStyle(
-                                fontWeight: FontWeight.w700, fontSize: 25),
+                                color: Pallete.textgreyColor, fontSize: 15),
                           ),
-                          const Text(
-                            'مُراسَلتِي',
-                            style: TextStyle(
-                              color: Pallete.secondarygreenColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 25,
-                              fontFamily: 'Cairo',
-                            ),
-                          ),
-                          SizedBox(
-                            height: MediaQuery.sizeOf(context).height * 0.01,
-                          ),
-                          SizedBox(
-                            width: MediaQuery.sizeOf(context).width * 0.85,
-                            child: const Text(
-                              'Connecter les étudiants, les parents et les écoles pour un avenir meilleur.',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Pallete.textgreyColor, fontSize: 15),
-                            ),
-                          ),
-                          SizedBox(
-                            height: MediaQuery.sizeOf(context).height * 0.01,
-                          ),
-                          const NameTextForm(),
-                          SizedBox(
-                            height: MediaQuery.sizeOf(context).height * 0.001,
-                          ),
-                          const FamilyNameTextForm(),
-                          SizedBox(
-                            height: MediaQuery.sizeOf(context).height * 0.015,
-                          ),
-                          const PhoneNumberTextForm(),
-                          SizedBox(
-                            height: MediaQuery.sizeOf(context).height * 0.015,
-                          ),
-                          const LoginButton(),
-                        ],
-                      ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.sizeOf(context).height * 0.05,
+                        ),
+                        const PasswordTextForm(),
+                        SizedBox(
+                          height: MediaQuery.sizeOf(context).height * 0.001,
+                        ),
+                        const ConfirmPasswordTextForm(),
+                        SizedBox(
+                          height: MediaQuery.sizeOf(context).height * 0.015,
+                        ),
+                        const ConfirmButton(),
+                        const Text(
+                          'Or',
+                        ),
+                        const LoginButton(),
+                      ],
                     ),
                   ],
                 ),
@@ -136,63 +133,17 @@ class TeacherSignUp extends StatelessWidget {
   }
 }
 
-class NameTextForm extends StatefulWidget {
-  const NameTextForm({
+class ConfirmPasswordTextForm extends StatefulWidget {
+  const ConfirmPasswordTextForm({
     super.key,
   });
 
   @override
-  _NameTextFormState createState() => _NameTextFormState();
+  _ConfirmPasswordTextFormState createState() =>
+      _ConfirmPasswordTextFormState();
 }
 
-class _NameTextFormState extends State<NameTextForm> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 30),
-          child: Text(
-            'Nom',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: TextField(
-            controller: name,
-            keyboardType: TextInputType.name,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
-                ),
-              ),
-              hintText: 'Nom',
-              hintStyle: TextStyle(
-                color: Pallete.disablegreyColor,
-                fontSize: 14,
-                fontWeight: FontWeight.w100,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class FamilyNameTextForm extends StatefulWidget {
-  const FamilyNameTextForm({
-    super.key,
-  });
-
-  @override
-  _FamilyNameTextFormState createState() => _FamilyNameTextFormState();
-}
-
-class _FamilyNameTextFormState extends State<FamilyNameTextForm> {
+class _ConfirmPasswordTextFormState extends State<ConfirmPasswordTextForm> {
   bool obscureText = true;
   @override
   Widget build(BuildContext context) {
@@ -202,27 +153,93 @@ class _FamilyNameTextFormState extends State<FamilyNameTextForm> {
         const Padding(
           padding: EdgeInsets.only(left: 30),
           child: Text(
-            'Prénom',
+            'Confirmer le mot de passe',
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: TextField(
-            controller: familyname,
-            keyboardType: TextInputType.name,
+            controller: passwordconfirm,
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
+              hintText: 'mot de passe',
+              hintStyle: const TextStyle(
+                color: Pallete.disablegreyColor,
+                fontSize: 14,
+                fontWeight: FontWeight.w100,
+              ),
+              suffixIcon: IconButton(
+                icon: Icon(
+                  obscureText ? Icons.visibility_off : Icons.visibility,
+                ),
+                onPressed: () {
+                  setState(() {
+                    obscureText = !obscureText;
+                  });
+                },
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class PasswordTextForm extends StatefulWidget {
+  const PasswordTextForm({
+    super.key,
+  });
+
+  @override
+  _PasswordTextFormState createState() => _PasswordTextFormState();
+}
+
+class _PasswordTextFormState extends State<PasswordTextForm> {
+  bool obscureText = true;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(left: 30),
+          child: Text(
+            'Mot de passe',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: TextField(
+            controller: password,
             obscureText: obscureText,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(10),
                 ),
               ),
-              hintText: 'Prénom',
-              hintStyle: TextStyle(
+              hintText: 'mot de passe',
+              hintStyle: const TextStyle(
                 color: Pallete.disablegreyColor,
                 fontSize: 14,
                 fontWeight: FontWeight.w100,
+              ),
+              suffixIcon: IconButton(
+                icon: Icon(
+                  obscureText ? Icons.visibility_off : Icons.visibility,
+                ),
+                onPressed: () {
+                  setState(() {
+                    obscureText = !obscureText;
+                  });
+                },
               ),
             ),
           ),
@@ -232,50 +249,37 @@ class _FamilyNameTextFormState extends State<FamilyNameTextForm> {
   }
 }
 
-class PhoneNumberTextForm extends StatefulWidget {
-  const PhoneNumberTextForm({
+class ConfirmButton extends StatelessWidget {
+  const ConfirmButton({
     super.key,
   });
 
   @override
-  _PhoneNumberTextFormState createState() => _PhoneNumberTextFormState();
-}
-
-class _PhoneNumberTextFormState extends State<PhoneNumberTextForm> {
-  bool obscureText = true;
-  @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 30),
-          child: Text(
-            'N° telephone',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.89,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          elevation: 0.0,
+          backgroundColor: Pallete.primarygreenColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: TextField(
-            controller: phoneNumber,
-            keyboardType: TextInputType.phone,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
-                ),
-              ),
-              hintText: 'xx-xx-xx-xx-xx',
-              hintStyle: TextStyle(
-                color: Pallete.disablegreyColor,
-                fontSize: 14,
-                fontWeight: FontWeight.w100,
-              ),
+        onPressed: () {},
+        child: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text(
+            'Confirmer',
+            style: TextStyle(
+              fontFamily: 'Nunito',
+              color: Colors.white,
+              fontSize: 22,
+              fontWeight: FontWeight.w400,
             ),
           ),
         ),
-      ],
+      ),
     );
   }
 }
@@ -298,12 +302,12 @@ class LoginButton extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          Get.to(const StudentConfirmSignUpScreen());
+          Get.to(const TeacherLoginScreen());
         },
         child: const Padding(
           padding: EdgeInsets.all(8.0),
           child: Text(
-            'Next',
+            'Login',
             style: TextStyle(
               fontFamily: 'Nunito',
               color: Colors.white,

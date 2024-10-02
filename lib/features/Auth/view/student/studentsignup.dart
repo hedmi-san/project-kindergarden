@@ -6,8 +6,6 @@ import 'package:project_kindergarden/features/Auth/view/student/secondstudentsig
 import 'package:project_kindergarden/features/Auth/view/student/studentlogin.dart';
 import 'package:project_kindergarden/theme/theme.dart';
 
-import '../../../startScreen/view/start.dart';
-
 final phoneNumber = TextEditingController();
 final familyname = TextEditingController();
 final name = TextEditingController();

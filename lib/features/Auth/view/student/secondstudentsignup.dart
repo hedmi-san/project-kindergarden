@@ -153,7 +153,7 @@ class _ConfirmPasswordTextFormState extends State<ConfirmPasswordTextForm> {
         const Padding(
           padding: EdgeInsets.only(left: 30),
           child: Text(
-            'COnfirmer le mot de passe',
+            'Confirmer le mot de passe',
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
         ),

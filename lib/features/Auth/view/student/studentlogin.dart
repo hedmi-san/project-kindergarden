@@ -1,7 +1,6 @@
-import 'dart:ffi';
+// ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:project_kindergarden/theme/theme.dart';
 
 final phoneNumber = TextEditingController();
@@ -55,7 +54,7 @@ class StudentLoginScreen extends StatelessWidget {
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                height: MediaQuery.sizeOf(context).height * 0.70,
+                height: MediaQuery.sizeOf(context).height * 0.72,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -106,6 +105,14 @@ class StudentLoginScreen extends StatelessWidget {
                           height: MediaQuery.sizeOf(context).height * 0.001,
                         ),
                         const PasswordTextForm(),
+                        SizedBox(
+                          height: MediaQuery.sizeOf(context).height * 0.015,
+                        ),
+                        const LoginButton(),
+                        const Text(
+                          'Or',
+                        ),
+                        const SignupButton(),
                       ],
                     ),
                   ],
@@ -121,8 +128,8 @@ class StudentLoginScreen extends StatelessWidget {
 
 class PhoneNumberTextForm extends StatefulWidget {
   const PhoneNumberTextForm({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _PhoneNumberTextFormState createState() => _PhoneNumberTextFormState();
@@ -142,7 +149,7 @@ class _PhoneNumberTextFormState extends State<PhoneNumberTextForm> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: TextField(
             controller: phoneNumber,
             keyboardType: TextInputType.number,
@@ -168,8 +175,8 @@ class _PhoneNumberTextFormState extends State<PhoneNumberTextForm> {
 
 class PasswordTextForm extends StatefulWidget {
   const PasswordTextForm({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _PasswordTextFormState createState() => _PasswordTextFormState();
@@ -224,20 +231,19 @@ class _PasswordTextFormState extends State<PasswordTextForm> {
   }
 }
 
-class ContinueButton extends StatelessWidget {
-  const ContinueButton({
+class LoginButton extends StatelessWidget {
+  const LoginButton({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(bottom: 12),
-      width: MediaQuery.of(context).size.width * 0.6,
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.89,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           elevation: 0.0,
-          backgroundColor: Pallete.secondarygreenColor,
+          backgroundColor: Pallete.primarygreenColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -246,9 +252,47 @@ class ContinueButton extends StatelessWidget {
         child: const Padding(
           padding: EdgeInsets.all(8.0),
           child: Text(
-            'Continuer',
+            'Login',
             style: TextStyle(
+              fontFamily: 'Nunito',
               color: Colors.white,
+              fontSize: 22,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SignupButton extends StatelessWidget {
+  const SignupButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.89,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          elevation: 0.0,
+          side: const BorderSide(
+            color: Pallete.bordergreyColor,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+        onPressed: () {},
+        child: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text(
+            'Sign up',
+            style: TextStyle(
+              fontFamily: 'Nunito',
+              color: Colors.black,
               fontSize: 22,
               fontWeight: FontWeight.w400,
             ),

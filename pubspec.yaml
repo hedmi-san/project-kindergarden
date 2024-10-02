@@ -78,15 +78,18 @@ flutter:
     - family: Poppins
       fonts:
         - asset: assets/fonts/Poppins-Regular.ttf
-        - asset: assets/font/Poppins-Bold.ttf
+        - asset: assets/fonts/Poppins-Bold.ttf
           weight: 700
-        - asset: assets/font/Poppins-ExtraBold.ttf
+        - asset: assets/fonts/Poppins-ExtraBold.ttf
           weight: 900
     - family: Cairo
       fonts:
         - asset: assets/fonts/Cairo-Regular.ttf
         - asset: assets/fonts/Cairo-Bold.ttf
           weight: 700
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/Nunito-Bold.ttf
   #
   #
   # For details regarding fonts from package dependencies,

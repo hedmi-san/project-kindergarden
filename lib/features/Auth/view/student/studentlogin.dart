@@ -18,11 +18,13 @@ class StudentLoginScreen extends StatelessWidget {
             Container(
               height: MediaQuery.sizeOf(context).height * 0.31,
               width: MediaQuery.sizeOf(context).width,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(
+                  image: const AssetImage(
                       'assets/images/student login background image.png'),
                   fit: BoxFit.fill,
+                  colorFilter: ColorFilter.mode(
+                      Colors.green.withOpacity(0.8), BlendMode.overlay),
                 ),
               ),
               child: Stack(

@@ -1,6 +1,9 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:project_kindergarden/features/Auth/view/teacher/teachersignup.dart';
+import 'package:project_kindergarden/features/startScreen/view/start.dart';
 import 'package:project_kindergarden/theme/theme.dart';
 
 final phoneNumber = TextEditingController();
@@ -38,7 +41,9 @@ class TeacherLoginScreen extends StatelessWidget {
                   Align(
                     alignment: Alignment.topLeft,
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.off(const StartScreen());
+                      },
                       icon: const Icon(
                         Icons.arrow_back,
                         color: Colors.white,
@@ -286,7 +291,9 @@ class SignupButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          Get.to(const TeacherSignUp());
+        },
         child: const Padding(
           padding: EdgeInsets.all(8.0),
           child: Text(

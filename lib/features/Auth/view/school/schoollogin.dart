@@ -1,6 +1,8 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:project_kindergarden/features/startScreen/view/start.dart';
 import 'package:project_kindergarden/theme/theme.dart';
 
 final phoneNumber = TextEditingController();
@@ -38,7 +40,9 @@ class SchoolLoginScreen extends StatelessWidget {
                   Align(
                     alignment: Alignment.topLeft,
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.off(const StartScreen());
+                      },
                       icon: const Icon(
                         Icons.arrow_back,
                         color: Colors.white,
@@ -107,13 +111,9 @@ class SchoolLoginScreen extends StatelessWidget {
                         ),
                         const PasswordTextForm(),
                         SizedBox(
-                          height: MediaQuery.sizeOf(context).height * 0.015,
+                          height: MediaQuery.sizeOf(context).height * 0.05,
                         ),
                         const LoginButton(),
-                        const Text(
-                          'Or',
-                        ),
-                        const SignupButton(),
                       ],
                     ),
                   ],
@@ -257,43 +257,6 @@ class LoginButton extends StatelessWidget {
             style: TextStyle(
               fontFamily: 'Nunito',
               color: Colors.white,
-              fontSize: 22,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class SignupButton extends StatelessWidget {
-  const SignupButton({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.89,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          elevation: 0.0,
-          side: const BorderSide(
-            color: Pallete.bordergreyColor,
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-        onPressed: () {},
-        child: const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text(
-            'Sign up',
-            style: TextStyle(
-              fontFamily: 'Nunito',
-              color: Colors.black,
               fontSize: 22,
               fontWeight: FontWeight.w400,
             ),

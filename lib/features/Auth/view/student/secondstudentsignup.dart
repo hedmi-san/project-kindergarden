@@ -2,16 +2,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_kindergarden/features/Auth/view/student/studentlogin.dart';
 import 'package:project_kindergarden/features/Auth/view/student/studentsignup.dart';
 import 'package:project_kindergarden/theme/theme.dart';
 
-import '../../../startScreen/view/start.dart';
-
-final phoneNumber = TextEditingController();
+final passwordconfirm = TextEditingController();
 final password = TextEditingController();
 
-class StudentLoginScreen extends StatelessWidget {
-  const StudentLoginScreen({super.key});
+class StudentConfirmSignUpScreen extends StatelessWidget {
+  const StudentConfirmSignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +35,7 @@ class StudentLoginScreen extends StatelessWidget {
                   const Align(
                     alignment: Alignment.topCenter,
                     child: Text(
-                      'Login étudiant',
+                      'Sign up étudiant',
                       style: TextStyle(color: Colors.white, fontSize: 29),
                     ),
                   ),
@@ -44,7 +43,7 @@ class StudentLoginScreen extends StatelessWidget {
                     alignment: Alignment.topLeft,
                     child: IconButton(
                       onPressed: () {
-                        Get.off(const StartScreen());
+                        Get.off(const StudentSignUp());
                       },
                       icon: const Icon(
                         Icons.arrow_back,
@@ -108,19 +107,19 @@ class StudentLoginScreen extends StatelessWidget {
                         SizedBox(
                           height: MediaQuery.sizeOf(context).height * 0.05,
                         ),
-                        const PhoneNumberTextForm(),
+                        const PasswordTextForm(),
                         SizedBox(
                           height: MediaQuery.sizeOf(context).height * 0.001,
                         ),
-                        const PasswordTextForm(),
+                        const ConfirmPasswordTextForm(),
                         SizedBox(
                           height: MediaQuery.sizeOf(context).height * 0.015,
                         ),
-                        const LoginButton(),
+                        const ConfirmButton(),
                         const Text(
                           'Or',
                         ),
-                        const SignupButton(),
+                        const LoginButton(),
                       ],
                     ),
                   ],
@@ -134,16 +133,18 @@ class StudentLoginScreen extends StatelessWidget {
   }
 }
 
-class PhoneNumberTextForm extends StatefulWidget {
-  const PhoneNumberTextForm({
+class ConfirmPasswordTextForm extends StatefulWidget {
+  const ConfirmPasswordTextForm({
     super.key,
   });
 
   @override
-  _PhoneNumberTextFormState createState() => _PhoneNumberTextFormState();
+  _ConfirmPasswordTextFormState createState() =>
+      _ConfirmPasswordTextFormState();
 }
 
-class _PhoneNumberTextFormState extends State<PhoneNumberTextForm> {
+class _ConfirmPasswordTextFormState extends State<ConfirmPasswordTextForm> {
+  bool obscureText = true;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -152,26 +153,35 @@ class _PhoneNumberTextFormState extends State<PhoneNumberTextForm> {
         const Padding(
           padding: EdgeInsets.only(left: 30),
           child: Text(
-            'N° telephone',
+            'COnfirmer le mot de passe',
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: TextField(
-            controller: phoneNumber,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(
+            controller: passwordconfirm,
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(10),
                 ),
               ),
-              hintText: 'xx-xx-xx-xx-xx',
-              hintStyle: TextStyle(
+              hintText: 'mot de passe',
+              hintStyle: const TextStyle(
                 color: Pallete.disablegreyColor,
                 fontSize: 14,
                 fontWeight: FontWeight.w100,
+              ),
+              suffixIcon: IconButton(
+                icon: Icon(
+                  obscureText ? Icons.visibility_off : Icons.visibility,
+                ),
+                onPressed: () {
+                  setState(() {
+                    obscureText = !obscureText;
+                  });
+                },
               ),
             ),
           ),
@@ -239,8 +249,8 @@ class _PasswordTextFormState extends State<PasswordTextForm> {
   }
 }
 
-class LoginButton extends StatelessWidget {
-  const LoginButton({
+class ConfirmButton extends StatelessWidget {
+  const ConfirmButton({
     super.key,
   });
 
@@ -260,7 +270,7 @@ class LoginButton extends StatelessWidget {
         child: const Padding(
           padding: EdgeInsets.all(8.0),
           child: Text(
-            'Login',
+            'Confirmer',
             style: TextStyle(
               fontFamily: 'Nunito',
               color: Colors.white,
@@ -274,8 +284,8 @@ class LoginButton extends StatelessWidget {
   }
 }
 
-class SignupButton extends StatelessWidget {
-  const SignupButton({
+class LoginButton extends StatelessWidget {
+  const LoginButton({
     super.key,
   });
 
@@ -286,23 +296,21 @@ class SignupButton extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           elevation: 0.0,
-          side: const BorderSide(
-            color: Pallete.bordergreyColor,
-          ),
+          backgroundColor: Pallete.primarygreenColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
         ),
         onPressed: () {
-          Get.to(const StudentSignUp());
+          Get.to(const StudentLoginScreen());
         },
         child: const Padding(
           padding: EdgeInsets.all(8.0),
           child: Text(
-            'Sign up',
+            'Login',
             style: TextStyle(
               fontFamily: 'Nunito',
-              color: Colors.black,
+              color: Colors.white,
               fontSize: 22,
               fontWeight: FontWeight.w400,
             ),

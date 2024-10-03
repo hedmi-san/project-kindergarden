@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_kindergarden/features/Auth/view/student/studentlogin.dart';
 import 'package:project_kindergarden/features/Auth/view/student/studentsignup.dart';
+import 'package:project_kindergarden/features/InformationForm/view/student/studentinformation.dart';
 import 'package:project_kindergarden/theme/theme.dart';
 
 final passwordconfirm = TextEditingController();
@@ -266,7 +267,9 @@ class ConfirmButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          Get.off(const StudentInfoScreen());
+        },
         child: const Padding(
           padding: EdgeInsets.all(8.0),
           child: Text(

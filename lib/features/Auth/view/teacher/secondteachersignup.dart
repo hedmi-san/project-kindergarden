@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_kindergarden/features/Auth/view/teacher/teacherlogin.dart';
 import 'package:project_kindergarden/features/Auth/view/teacher/teachersignup.dart';
+import 'package:project_kindergarden/features/InformationForm/view/teacher/teacherinformation.dart';
 import 'package:project_kindergarden/theme/theme.dart';
 
 final passwordconfirm = TextEditingController();
@@ -24,7 +25,7 @@ class TeacherConfirmSignUpScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: const AssetImage(
-                      'assets/images/teacher login background image.png'),
+                      'assets/images/teacher login background image.jpg'),
                   fit: BoxFit.fill,
                   colorFilter: ColorFilter.mode(
                       Colors.green.withOpacity(0.8), BlendMode.overlay),
@@ -266,7 +267,9 @@ class ConfirmButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          Get.off(const TeacherInfoScreen());
+        },
         child: const Padding(
           padding: EdgeInsets.all(8.0),
           child: Text(

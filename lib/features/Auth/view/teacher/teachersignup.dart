@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_kindergarden/features/Auth/view/student/secondstudentsignup.dart';
 import 'package:project_kindergarden/features/Auth/view/teacher/secondteachersignup.dart';
 import 'package:project_kindergarden/features/Auth/view/teacher/teacherlogin.dart';
 import 'package:project_kindergarden/theme/theme.dart';

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_kindergarden/features/InformationForm/view/student/studentinformation.dart';
 import 'package:project_kindergarden/features/startScreen/view/start.dart';
 
 void main() {
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Poppins',
       ),
-      home: const StartScreen(),
+      // home: const StartScreen(),
+      home: const StudentInfoScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

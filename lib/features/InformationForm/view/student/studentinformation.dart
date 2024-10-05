@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:project_kindergarden/constants/data.dart';
 import 'package:project_kindergarden/theme/pallete.dart';
@@ -97,7 +99,7 @@ final class StudentInfoScreen extends StatelessWidget {
                     'Gendre',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 17,
+                      fontSize: 16,
                     ),
                   ),
                   SizedBox(
@@ -124,6 +126,12 @@ final class StudentInfoScreen extends StatelessWidget {
                 height: MediaQuery.sizeOf(context).height * 0.018,
               ),
               const DatepickerForm(),
+              SizedBox(
+                height: MediaQuery.sizeOf(context).height * 0.018,
+              ),
+              StateMunicipalitySelector(
+                algeriaStates: algeriaStates,
+              ),
             ],
           ),
         ),
@@ -142,8 +150,8 @@ class DatepickerForm extends StatefulWidget {
 class _DatepickerFormState extends State<DatepickerForm> {
   @override
   void dispose() {
-    date.dispose();
     super.dispose();
+    date.dispose();
   }
 
   Future<void> _selectDate(BuildContext context) async {
@@ -181,12 +189,13 @@ class _DatepickerFormState extends State<DatepickerForm> {
                 controller: date,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
                   ),
                   hintText: 'Sélectionner une date',
                   hintStyle: TextStyle(
-                    color: Colors
-                        .grey, // Replace with Pallete.disablegreyColor if available
+                    color: Colors.grey,
                     fontSize: 14,
                     fontWeight: FontWeight.w100,
                   ),
@@ -197,6 +206,122 @@ class _DatepickerFormState extends State<DatepickerForm> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class StateMunicipalitySelector extends StatefulWidget {
+  final List<dynamic> algeriaStates;
+
+  const StateMunicipalitySelector({super.key, required this.algeriaStates});
+
+  @override
+  _StateMunicipalitySelectorState createState() =>
+      _StateMunicipalitySelectorState();
+}
+
+class _StateMunicipalitySelectorState extends State<StateMunicipalitySelector> {
+  String? selectedState;
+  String? selectedMunicipality;
+  List<Map<String, String>> municipalities = [];
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(left: 30),
+          child: Text(
+            'Lieu de naissance',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+          ),
+        ),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _buildStyledDropdown(
+              hint: 'Wilaya',
+              value: selectedState,
+              items: widget.algeriaStates.map((state) {
+                return DropdownMenuItem<String>(
+                  value: state['name_fr'],
+                  child: Text(state['name_fr']),
+                );
+              }).toList(),
+              onChanged: (String? newValue) {
+                setState(() {
+                  selectedState = newValue;
+                  selectedMunicipality = null;
+                  if (newValue != null) {
+                    var selectedStateData = widget.algeriaStates.firstWhere(
+                      (state) => state['name_fr'] == newValue,
+                    );
+                    municipalities = List<Map<String, String>>.from(
+                        selectedStateData['communes']);
+                  } else {
+                    municipalities = [];
+                  }
+                });
+              },
+            ),
+            _buildStyledDropdown(
+              hint: 'Baladiya',
+              value: selectedMunicipality,
+              items: municipalities.map((municipality) {
+                return DropdownMenuItem<String>(
+                  value: municipality['name_fr'],
+                  child: Text(municipality['name_fr']!),
+                );
+              }).toList(),
+              onChanged: selectedState == null
+                  ? null
+                  : (String? newValue) {
+                      setState(() {
+                        selectedMunicipality = newValue;
+                      });
+                    },
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildStyledDropdown({
+    required String hint,
+    required String? value,
+    required List<DropdownMenuItem<String>> items,
+    required ValueChanged<String?>? onChanged,
+  }) {
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.38,
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
+          hint: Text(
+            hint,
+            style: const TextStyle(color: Colors.grey, fontSize: 14),
+          ),
+          value: value,
+          items: items,
+          onChanged: onChanged,
+          isExpanded: true,
+          icon: const Icon(Icons.arrow_drop_down),
+          iconSize: 24,
+          elevation: 16,
+          style: const TextStyle(color: Colors.black, fontSize: 14),
+          dropdownColor: Colors.white,
+        ),
+      ),
     );
   }
 }

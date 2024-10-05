@@ -1,5 +1,5 @@
 List gendres = ['Male', 'Female'];
-List algeriastates = [
+List algeriaStates = [
   {
     "wilaya_id": 1,
     "name": "أدرار",

@@ -1961,3 +1961,22 @@ List algeriaStates = [
     ]
   }
 ];
+
+List educationalSystem = [
+  "jardin d'enfants",
+  "1 ere année primaire",
+  "2 eme année primaire",
+  "3 eme année primaire",
+  "4 eme année primaire",
+  "5 eme année primaire",
+  "1 ere année intermédiaire",
+  "2 eme année intermédiaire",
+  "3 eme année intermédiaire",
+  "4 eme année intermédiaire",
+  "1 ere année lycée",
+  "2 eme année lycée",
+  "3 eme année lycée",
+  "Étudiant universitaire",
+  "Étudiant d'institut de formation professionnelle",
+  "Inculte"
+];

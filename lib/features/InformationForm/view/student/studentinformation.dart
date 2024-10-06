@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project_kindergarden/constants/data.dart';
 import 'package:project_kindergarden/theme/pallete.dart';
 import 'package:intl/intl.dart';
@@ -95,11 +96,14 @@ final class StudentInfoScreen extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Gendre',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                  const Padding(
+                    padding: EdgeInsets.only(left: 8.0),
+                    child: Text(
+                      'Gendre',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -132,6 +136,46 @@ final class StudentInfoScreen extends StatelessWidget {
               StateMunicipalitySelector(
                 algeriaStates: algeriaStates,
               ),
+              SizedBox(
+                height: MediaQuery.sizeOf(context).height * 0.018,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(left: 8.0),
+                    child: Text(
+                      'Niveau éducatif',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.sizeOf(context).height * 0.01,
+                  ),
+                  DropdownMenu(
+                    inputDecorationTheme: InputDecorationTheme(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    hintText: 'niveau',
+                    textStyle:
+                        const TextStyle(color: Colors.black, fontSize: 14),
+                    width: MediaQuery.sizeOf(context).width * 0.82,
+                    dropdownMenuEntries: educationalSystem
+                        .map((e) => DropdownMenuEntry(value: e, label: e))
+                        .toList(),
+                    onSelected: (value) {},
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: MediaQuery.sizeOf(context).height * 0.03,
+              ),
+              const DoneButton(),
             ],
           ),
         ),
@@ -320,6 +364,41 @@ class _StateMunicipalitySelectorState extends State<StateMunicipalitySelector> {
           elevation: 16,
           style: const TextStyle(color: Colors.black, fontSize: 14),
           dropdownColor: Colors.white,
+        ),
+      ),
+    );
+  }
+}
+
+class DoneButton extends StatelessWidget {
+  const DoneButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.89,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          elevation: 0.0,
+          backgroundColor: Pallete.primarygreenColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+        onPressed: () {},
+        child: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text(
+            'Confirmer',
+            style: TextStyle(
+              fontFamily: 'Nunito',
+              color: Colors.white,
+              fontSize: 22,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
         ),
       ),
     );

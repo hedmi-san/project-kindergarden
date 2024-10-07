@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_kindergarden/features/Auth/view/teacher/teachersignup.dart';
 import 'package:project_kindergarden/features/startScreen/view/start.dart';
 import 'package:project_kindergarden/theme/theme.dart';
 
@@ -112,13 +111,9 @@ class TeacherLoginScreen extends StatelessWidget {
                         ),
                         const PasswordTextForm(),
                         SizedBox(
-                          height: MediaQuery.sizeOf(context).height * 0.015,
+                          height: MediaQuery.sizeOf(context).height * 0.05,
                         ),
                         const LoginButton(),
-                        const Text(
-                          'Or',
-                        ),
-                        const SignupButton(),
                       ],
                     ),
                   ],
@@ -262,45 +257,6 @@ class LoginButton extends StatelessWidget {
             style: TextStyle(
               fontFamily: 'Nunito',
               color: Colors.white,
-              fontSize: 22,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class SignupButton extends StatelessWidget {
-  const SignupButton({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.89,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          elevation: 0.0,
-          side: const BorderSide(
-            color: Pallete.bordergreyColor,
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-        onPressed: () {
-          Get.to(const TeacherSignUp());
-        },
-        child: const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text(
-            'Sign up',
-            style: TextStyle(
-              fontFamily: 'Nunito',
-              color: Colors.black,
               fontSize: 22,
               fontWeight: FontWeight.w400,
             ),

@@ -6,6 +6,8 @@ import 'package:project_kindergarden/constants/data.dart';
 import 'package:project_kindergarden/theme/pallete.dart';
 import 'package:intl/intl.dart';
 
+import '../../../Home/student/studenthome.dart';
+
 final date = TextEditingController();
 
 final class StudentInfoScreen extends StatelessWidget {
@@ -192,12 +194,6 @@ class DatepickerForm extends StatefulWidget {
 }
 
 class _DatepickerFormState extends State<DatepickerForm> {
-  @override
-  void dispose() {
-    super.dispose();
-    date.dispose();
-  }
-
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -387,7 +383,9 @@ class DoneButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          Get.off(() => const StudentHomeScreen());
+        },
         child: const Padding(
           padding: EdgeInsets.all(8.0),
           child: Text(
